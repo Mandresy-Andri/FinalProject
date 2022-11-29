@@ -17,7 +17,7 @@ public class TShirtController {
 
     //get all t-shirts
     @GetMapping("/tshirt")
-    public List<TShirt> getArtists() {
+    public List<TShirt> getTShirt() {
         return repo.findAll();
     }
 
