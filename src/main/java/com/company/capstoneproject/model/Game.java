@@ -22,7 +22,8 @@ public class Game implements Serializable{
     private String title;
 
     @NotEmpty(message = "You must supply a value for esrb_rating.")
-    private String esrb_rating;
+    @Column(name = "esrb_rating", nullable = false)
+    private String esrbRating;
 
     @NotEmpty(message = "You must supply a value for description.")
     private String description;
@@ -52,12 +53,12 @@ public class Game implements Serializable{
         this.title = title;
     }
 
-    public String getEsrb_rating() {
-        return esrb_rating;
+    public String getEsrbRating() {
+        return esrbRating;
     }
 
-    public void setEsrb_rating(String esrb_rating) {
-        this.esrb_rating = esrb_rating;
+    public void setEsrbRating(String esrbRating) {
+        this.esrbRating = esrbRating;
     }
 
     public String getDescription() {
@@ -100,7 +101,7 @@ public class Game implements Serializable{
         return getGame_id() == game.getGame_id() &&
                 getQuantity() == game.getQuantity() &&
                 getTitle().equals(game.getTitle()) &&
-                getEsrb_rating().equals(game.getEsrb_rating()) &&
+                getEsrbRating().equals(game.getEsrbRating()) &&
                 getDescription().equals(game.getDescription()) &&
                 getPrice().equals(game.getPrice()) &&
                 getStudio().equals(game.getStudio());
@@ -108,7 +109,7 @@ public class Game implements Serializable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(getGame_id(), getTitle(), getEsrb_rating(), getDescription(), getPrice(), getStudio(),
+        return Objects.hash(getGame_id(), getTitle(), getEsrbRating(), getDescription(), getPrice(), getStudio(),
                 getQuantity());
     }
 
@@ -117,7 +118,7 @@ public class Game implements Serializable{
         return "game{" +
                 "game_id=" + game_id +
                 ", title='" + title + '\'' +
-                ", esrb_rating='" + esrb_rating + '\'' +
+                ", esrb_rating='" + esrbRating + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", studio='" + studio + '\'' +

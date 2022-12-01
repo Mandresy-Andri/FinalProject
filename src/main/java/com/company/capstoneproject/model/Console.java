@@ -18,8 +18,8 @@ public class Console implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int console_id;
 
-    @NotEmpty(message = "You must a supply a value for Console")
-    private String console_name;
+    //@NotEmpty(message = "You must a supply a value for Console")
+    //private String console_name;
 
     @NotEmpty(message = "You must supply a value for description")
     private String description;
@@ -39,14 +39,6 @@ public class Console implements Serializable {
 
     public void setConsole_id(int console_id) {
         this.console_id = console_id;
-    }
-
-    public String getConsole_name() {
-        return console_name;
-    }
-
-    public void setConsole_name(String console_name) {
-        this.console_name = console_name;
     }
 
     public String getDescription() {
@@ -86,19 +78,18 @@ public class Console implements Serializable {
         if(this == o) return true;
         if(o == null || getClass() != o.getClass()) return false;
         Console console = (Console) o;
-        return getConsole_id() == console.getConsole_id() && getQuantity() == console.getQuantity() && getConsole_name().equals(console.getConsole_name()) && getDescription().equals(console.getDescription()) && getPrice().equals(console.getPrice()) && getManufacturer().equals(console.getManufacturer());
+        return getConsole_id() == console.getConsole_id() && getQuantity() == console.getQuantity()  && getDescription().equals(console.getDescription()) && getPrice().equals(console.getPrice()) && getManufacturer().equals(console.getManufacturer());
     }
 
     @Override
     public int hashCode(){
-        return Objects.hash(getConsole_id(),getConsole_name(),getDescription(),getPrice(),getManufacturer(),getQuantity());
+        return Objects.hash(getConsole_id(),getDescription(),getPrice(),getManufacturer(),getQuantity());
     }
 
     @Override
     public String toString() {
         return "Console{" +
                 "console_id=" + console_id +
-                ", console_name='" + console_name + '\'' +
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", manufacturer='" + manufacturer + '\'' +

@@ -47,7 +47,7 @@ public class GameController {
         Game newGame = repo.findById(id)
                 .map(g -> {
                     g.setTitle(game.getTitle());
-                    g.setEsrb_rating(game.getEsrb_rating());
+                    g.setEsrbRating(game.getEsrbRating());
                     g.setDescription(game.getDescription());
                     g.setPrice(game.getPrice());
                     g.setStudio(game.getStudio());
@@ -77,7 +77,7 @@ public class GameController {
     @GetMapping(value = "/Esrb_rating/{Esrb_rating}")
     @ResponseStatus(HttpStatus.OK)
     public List<Game> findByEsrb_rating(@PathVariable String esrb_rating) {
-        return repo.getGamesByEsrb_rating(esrb_rating);
+        return repo.getGamesByEsrbRating(esrb_rating);
     }
 
     @GetMapping(value = "/title/{title}")
