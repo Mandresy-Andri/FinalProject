@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer> {
     List<Game> getGamesByStudio(String studio);
-    List<Game> getGamesByEsrb_rating(String esrb_rating);
+    List<Game> getGamesByEsrbRating(String esrb_rating);
     List<Game> getGamesByTitle(String title);
 }

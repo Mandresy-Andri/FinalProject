@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface ConsoleRepository extends JpaRepository<Console, Integer>{
     List<Console> getConsoleByManufacturer(String manufacturer);
-    List<Console> getConsoleByName(String name);
+
 }
 
 

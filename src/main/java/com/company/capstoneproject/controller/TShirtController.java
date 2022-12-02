@@ -22,7 +22,7 @@ public class TShirtController {
     }
 
     //get t-shirt by size
-    @GetMapping("/tshirt/{id}")
+    @GetMapping("/tshirt/size/{size}")
     public List<TShirt> getTShirtBySize(@PathVariable String size) {
         Optional<List<TShirt>> returnVal = repo.findBySize(size);
         if (returnVal.isPresent()) {
@@ -33,7 +33,7 @@ public class TShirtController {
     }
 
     //get t-shirt by color
-    @GetMapping("/tshirt/{color}")
+    @GetMapping("/tshirt/color/{color}")
     public List<TShirt> getTShirtByColor(@PathVariable String color) {
         Optional<List<TShirt>> returnVal = repo.findByColor(color);
         if (returnVal.isPresent()) {

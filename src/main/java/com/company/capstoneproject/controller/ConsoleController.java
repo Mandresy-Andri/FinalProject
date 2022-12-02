@@ -41,7 +41,7 @@ public class ConsoleController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Console updateConsole(@RequestBody Console console, @PathVariable int id){
         Console newConsole = repo.findById(id).map(c ->{
-            c.setConsole_name(console.getConsole_name());
+            //c.setConsole_name(console.getConsole_name());
             c.setDescription(console.getDescription());
             c.setManufacturer(console.getManufacturer());
             c.setPrice(console.getPrice());
@@ -63,11 +63,5 @@ public class ConsoleController {
     @ResponseStatus(HttpStatus.OK)
     public List<Console> findByManufacturer(@PathVariable String manufacturer){
         return repo.getConsoleByManufacturer(manufacturer);
-    }
-
-    @GetMapping(value = "/name/{name}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Console> findaByName(@PathVariable String name){
-        return repo.getConsoleByName(name);
     }
 }
