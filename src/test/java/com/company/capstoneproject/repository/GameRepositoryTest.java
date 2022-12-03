@@ -34,10 +34,8 @@ public class GameRepositoryTest {
         Game game = new Game();
         game.setTitle("Castlevania");
         game.setEsrbRating("E");
-        game.setDescription("Enter At Your Own Risk!\nIf you think it's scary on the outside, wait'll you see the basement.\n" +
-                "You're in for the longest night of your life. Ghosts, goblins, demons, wolves, bats - creatures lurking around every corner.\n" +
-                "Better stick close to the cavern floor - it's your only chance of finding a weapon or two.\n" +
-                "Because when you finally meet the count, you know he'll be going for the jugular. So keep your stake sharp.");
+        game.setDescription("Enter At Your Own Risk!\nBecause when you finally meet the count, you know he'll be going " +
+                "for the jugular. So keep your stake sharp.");
         // From the back of the box of Castlevania on NES
         game.setPrice(BigDecimal.valueOf(29.99));
         game.setStudio("Konami");
@@ -64,10 +62,8 @@ public class GameRepositoryTest {
         Game game1 = new Game();
         game1.setTitle("Castlevania");
         game1.setEsrbRating("E");
-        game1.setDescription("Enter At Your Own Risk!\nIf you think it's scary on the outside, wait'll you see the basement.\n" +
-                "You're in for the longest night of your life. Ghosts, goblins, demons, wolves, bats - creatures lurking around every corner.\n" +
-                "Better stick close to the cavern floor - it's your only chance of finding a weapon or two.\n" +
-                "Because when you finally meet the count, you know he'll be going for the jugular. So keep your stake sharp.");
+        game1.setDescription("Enter At Your Own Risk!\nBecause when you finally meet the count, you know he'll be going " +
+                "for the jugular. So keep your stake sharp.");
         // From the back of the box of Castlevania on NES
         game1.setPrice(BigDecimal.valueOf(29.99));
         game1.setStudio("Konami");
@@ -78,10 +74,8 @@ public class GameRepositoryTest {
         Game game2 = new Game();
         game2.setTitle("Super Mario 64");
         game2.setEsrbRating("E");
-        game2.setDescription("Mario is super in a whole new way! Combining the finest 3-D graphics ever developed for a " +
-                "video game and an explosive sound track, Super Mario 64 becomes a new standard for video games. It's " +
-                "packed with bruising battles, daunting obstacle courses and underwater adventures. Retrieve the Power " +
-                "Stars from their hidden locations and confront your arch nemesis - Bowser, King of the Koopas!\n.");
+        game2.setDescription("Mario is super in a whole new way! Retrieve the Power Stars from their hidden locations " +
+                "and confront your arch nemesis - Bowser, King of the Koopas!");
         // From the back of the box of Super Mario 64 on N64
         game2.setPrice(BigDecimal.valueOf(39.97));
         game2.setStudio("Nintendo");
@@ -92,15 +86,8 @@ public class GameRepositoryTest {
         Game game3 = new Game();
         game3.setTitle("Mega Man X");
         game3.setEsrbRating("E");
-        game3.setDescription("Near the end of his life, Dr. Light succeeds in creating the first of a new series of " +
-                "robots which will change the world. Able to think and make decisions, this new robot holds great danger " +
-                "as well as great possibilities. Fearful of the possible consequences of unleashing his creation on the" +
-                "world, Dr. Light decides to seal him in a capsule and test his systems until they are totally reliable. " +
-                "The future will have to decide his fate....\nReleased from the capsule by Dr. Cain, 'X' is born into the " +
-                "world of the future where the robot rebellions are a thing of the past. But when Dr. Cain tries to " +
-                "implement Dr. Light's designs into a new series of Reploids, something goes horribly wrong. Now the " +
-                "future lies on the brink of destruction and a new Mega Man must emerge to face Sigma and his forces " +
-                "before the human race is wiped from the planet!");
+        game3.setDescription("The future lies on the brink of destruction and a new Mega Man must emerge to face Sigma " +
+                "and his forces before the human race is wiped from the planet!");
         // From the back of the box of Mega Man X on SNES
         game3.setPrice(BigDecimal.valueOf(34.99));
         game3.setStudio("Capcom");
@@ -120,10 +107,8 @@ public class GameRepositoryTest {
         Game game = new Game();
         game.setTitle("Castlevania");
         game.setEsrbRating("E");
-        game.setDescription("Enter At Your Own Risk!\nIf you think it's scary on the outside, wait'll you see the basement.\n" +
-                "You're in for the longest night of your life. Ghosts, goblins, demons, wolves, bats - creatures lurking around every corner.\n" +
-                "Better stick close to the cavern floor - it's your only chance of finding a weapon or two.\n" +
-                "Because when you finally meet the count, you know he'll be going for the jugular. So keep your stake sharp.");
+        game.setDescription("Enter At Your Own Risk!\nBecause when you finally meet the count, you know he'll be going " +
+                "for the jugular. So keep your stake sharp.");
         // From the back of the box of Castlevania on NES
         game.setPrice(BigDecimal.valueOf(29.99));
         game.setStudio("Konami");
@@ -135,10 +120,7 @@ public class GameRepositoryTest {
         game1.setTitle("Castlevania: Symphony of the Night");
         game1.setEsrbRating("T");
         game1.setDescription("The legacy of evil returns...\nAs a descendant of Dracula, you must end the vampire " +
-                "bloodline. Can you rid the world of this unspeakable terror? Uncover the mystery of Castlevania and " +
-                "challenge an adventure as legendary as its name.\nOver 140 enemies, bosses and ghastly creatures.\n" +
-                "Awesome magical spells - transform into a bat, a wolf, or ethereal mist.\nHidden weapons, secrets and " +
-                "characters... the largest Castlevania ever!");
+                "bloodline. Hidden weapons, secrets and characters... the largest Castlevania ever!");
         // From the back of the box of Castlevania Symphony of the Night on PS1
         game1.setPrice(BigDecimal.valueOf(64.99));
         game1.setStudio("Konami");
@@ -147,11 +129,9 @@ public class GameRepositoryTest {
         gameRepository.save(game1);
 
         // Get by studio
-        List<Game> castlevanias = gameRepository.getGamesByStudio("Konami");
+        Optional<List<Game>> castlevanias = gameRepository.getGamesByStudio("Konami");
 
-        for (Game b : castlevanias) {
-            assertEquals(b.getStudio(), game.getStudio());
-        }
+        assertEquals(castlevanias.get().get(0).getStudio(), game.getStudio());
 
     }
 
@@ -163,10 +143,7 @@ public class GameRepositoryTest {
         game.setTitle("Castlevania: Symphony of the Night");
         game.setEsrbRating("T");
         game.setDescription("The legacy of evil returns...\nAs a descendant of Dracula, you must end the vampire " +
-                "bloodline. Can you rid the world of this unspeakable terror? Uncover the mystery of Castlevania and " +
-                "challenge an adventure as legendary as its name.\nOver 140 enemies, bosses and ghastly creatures.\n" +
-                "Awesome magical spells - transform into a bat, a wolf, or ethereal mist.\nHidden weapons, secrets and " +
-                "characters... the largest Castlevania ever!");
+                "bloodline. Hidden weapons, secrets and characters... the largest Castlevania ever!");
         // From the back of the box of Symphony of the Night on PS1
         game.setPrice(BigDecimal.valueOf(64.99));
         game.setStudio("Konami");
@@ -174,27 +151,22 @@ public class GameRepositoryTest {
 
         gameRepository.save(game);
 
-        Game game1 = new Game();
-        game1.setTitle("Dragon Ball Z: Budokai 3");
+        game = new Game();
+        game.setTitle("Dragon Ball Z: Budokai 3");
         game.setEsrbRating("T");
-        game1.setDescription("The Greatest Warriors.\nPulverize opponents with the Saiyan Overdrive Fighting System, including:\n" +
-                "Teleportation Counter: Recreate the lightning speed of DBZ\nTeleportation Tornado Combo: Pinball opponents " +
-                "in the air\nDragon Rush Attack: Experience explosive, cinematic new attack moves\bBukujutsu Flight: Go " +
-                "airbone at any time in the game\n\nA Tournament of Champions.\nBattle with any one of up to 40 characters " +
-                "from Dragon Ball Z, DBZ movies, and Dragon Ball GT\nCustomize your DBZ warriors and build the ultimate " +
-                "fighter\nPost and retrieve character profiles from the internet\n\nOnly ONE Will Prevail!");
+        game.setDescription("The Greatest Warriors. A Tournament of Champions.\nBattle with any one of up to 40 " +
+                "characters from Dragon Ball Z, DBZ movies, and Dragon Ball GT\nOnly ONE Will Prevail!");
         // From the back fo the box of Dragon Ball Z Budokai 3 on PS2
-        game1.setPrice(BigDecimal.valueOf(24.99));
-        game1.setStudio("Dimps");
+        game.setPrice(BigDecimal.valueOf(24.99));
+        game.setStudio("Dimps");
+        game.setQuantity(500);
 
-        gameRepository.save(game1);
+        gameRepository.save(game);
 
         // Get by ESRB Rating
-        List<Game> teen_ratings = gameRepository.getGamesByEsrbRating("T");
+        Optional<List<Game>> teen_ratings = gameRepository.getGamesByEsrbRating("T");
 
-        for (Game b : teen_ratings) {
-            assertEquals(b.getEsrbRating(), game.getEsrbRating());
-        }
+        assertEquals(teen_ratings.get().get(0).getEsrbRating(), game.getEsrbRating());
 
     }
 
@@ -205,10 +177,8 @@ public class GameRepositoryTest {
         Game game1 = new Game();
         game1.setTitle("Castlevania");
         game1.setEsrbRating("E");
-        game1.setDescription("Enter At Your Own Risk!\nIf you think it's scary on the outside, wait'll you see the basement.\n" +
-                "You're in for the longest night of your life. Ghosts, goblins, demons, wolves, bats - creatures lurking around every corner.\n" +
-                "Better stick close to the cavern floor - it's your only chance of finding a weapon or two.\n" +
-                "Because when you finally meet the count, you know he'll be going for the jugular. So keep your stake sharp.");
+        game1.setDescription("Enter At Your Own Risk!\nBecause when you finally meet the count, you know he'll be going " +
+                "for the jugular. So keep your stake sharp.");
         // From the back of the box of Castlevania on NES
         game1.setPrice(BigDecimal.valueOf(29.99));
         game1.setStudio("Konami");
@@ -219,10 +189,8 @@ public class GameRepositoryTest {
         Game game2 = new Game();
         game2.setTitle("Super Mario 64");
         game2.setEsrbRating("E");
-        game2.setDescription("Mario is super in a whole new way! Combining the finest 3-D graphics ever developed for a " +
-                "video game and an explosive sound track, Super Mario 64 becomes a new standard for video games. It's " +
-                "packed with bruising battles, daunting obstacle courses and underwater adventures. Retrieve the Power " +
-                "Stars from their hidden locations and confront your arch nemesis - Bowser, King of the Koopas!\n.");
+        game2.setDescription("Mario is super in a whole new way! Retrieve the Power Stars from their hidden locations " +
+                "and confront your arch nemesis - Bowser, King of the Koopas!");
         // From the back of the box of Super Mario 64 on N64
         game2.setPrice(BigDecimal.valueOf(39.97));
         game2.setStudio("Nintendo");
@@ -233,10 +201,8 @@ public class GameRepositoryTest {
         Game game3 = new Game();
         game3.setTitle("Castlevania");
         game3.setEsrbRating("E");
-        game3.setDescription("Enter At Your Own Risk!\nIf you think it's scary on the outside, wait'll you see the basement.\n" +
-                "You're in for the longest night of your life. Ghosts, goblins, demons, wolves, bats - creatures lurking around every corner.\n" +
-                "Better stick close to the cavern floor - it's your only chance of finding a weapon or two.\n" +
-                "Because when you finally meet the count, you know he'll be going for the jugular. So keep your stake sharp.");
+        game3.setDescription("Enter At Your Own Risk!\nBecause when you finally meet the count, you know he'll be going " +
+                "for the jugular. So keep your stake sharp.");
         // From the back of the box of Castlevania on NES
         game3.setPrice(BigDecimal.valueOf(29.99));
         game3.setStudio("Konami");
@@ -245,11 +211,9 @@ public class GameRepositoryTest {
         gameRepository.save(game3);
 
         // Get by title
-        List<Game> castlevanias = gameRepository.getGamesByTitle("Castlevania");
+        Optional<List<Game>> castlevanias = gameRepository.getGamesByTitle("Castlevania");
 
-        for (Game b : castlevanias) {
-            assertEquals(b.getTitle(), game1.getTitle());
-        }
+        assertEquals(castlevanias.get().get(0).getTitle(), game1.getTitle());
 
     }
 
@@ -260,10 +224,8 @@ public class GameRepositoryTest {
         Game game1 = new Game();
         game1.setTitle("Castlevania");
         game1.setEsrbRating("E");
-        game1.setDescription("Enter At Your Own Risk!\nIf you think it's scary on the outside, wait'll you see the basement.\n" +
-                "You're in for the longest night of your life. Ghosts, goblins, demons, wolves, bats - creatures lurking around every corner.\n" +
-                "Better stick close to the cavern floor - it's your only chance of finding a weapon or two.\n" +
-                "Because when you finally meet the count, you know he'll be going for the jugular. So keep your stake sharp.");
+        game1.setDescription("Enter At Your Own Risk!\nBecause when you finally meet the count, you know he'll be going " +
+                "for the jugular. So keep your stake sharp.");
         // From the back of the box of Castlevania on NES
         game1.setPrice(BigDecimal.valueOf(29.99));
         game1.setStudio("Konami");

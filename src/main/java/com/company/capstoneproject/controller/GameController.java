@@ -71,18 +71,33 @@ public class GameController {
     @GetMapping(value = "/studio/{studio}")
     @ResponseStatus(HttpStatus.OK)
     public List<Game> findByStudio(@PathVariable String studio) {
-        return repo.getGamesByStudio(studio);
+        Optional<List<Game>> returnVal = repo.getGamesByStudio(studio);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
     }
 
     @GetMapping(value = "/Esrb_rating/{Esrb_rating}")
     @ResponseStatus(HttpStatus.OK)
     public List<Game> findByEsrb_rating(@PathVariable String esrb_rating) {
-        return repo.getGamesByEsrbRating(esrb_rating);
+        Optional<List<Game>> returnVal = repo.getGamesByEsrbRating(esrb_rating);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
     }
 
     @GetMapping(value = "/title/{title}")
     @ResponseStatus(HttpStatus.OK)
     public List<Game> findByTitle(@PathVariable String title) {
-        return repo.getGamesByTitle(title);
+        Optional<List<Game>> returnVal = repo.getGamesByTitle(title);
+        if (returnVal.isPresent()) {
+            return returnVal.get();
+        } else {
+            return null;
+        }
     }
 }

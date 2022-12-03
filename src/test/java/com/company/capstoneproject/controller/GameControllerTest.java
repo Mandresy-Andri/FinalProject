@@ -48,22 +48,7 @@ public class GameControllerTest {
         game.setTitle("Pokemon");
         game.setEsrbRating("E");
         game.setDescription("Pokémon introduces legions of gamers to the world of Kanto, where the likes of " +
-                "Charmander, Pikachu, and Mewtwo were first discovered. Through exciting exploration, battles, " +
-                "and trades, Trainers are able to access 150 Pokémon.\n" +
-                "You begin your journey in Pallet Town as a young boy. After a dangerous brush with wild Pokémon, " +
-                "Professor Oak teaches you how to capture Pokémon, and then sends you on your way as a fledgling " +
-                "Trainer. During your journey through Kanto, you must capture Pokémon to record their information in " +
-                "your Pokédex, as well as become a better Trainer by competing in Gyms scattered throughout the region. " +
-                "Once you've proven your mettle as a Pokémon Trainer, it's time to take on the Elite Four, a crack group " +
-                "of Trainers that will put all of your learned skills to the test.\n" +
-                "Your journey will be far from easy. In addition to the many Trainers and wild Pokémon you'll encounter " +
-                "along the way, you'll also have to be watchful of Team Rocket, a despicable group of Pokémon thieves. " +
-                "Prevent Team Rocket from stealing rare Pokémon and stop their criminal ways!\n" +
-                "You won't be able to catch every Pokémon in either Pokémon Red or Pokémon Blue; to collect every " +
-                "Pokémon, you'll have to trade with friends via the Game Link™ Cable. With it, you can also take your " +
-                "team of faithful Pokémon into battle against your pals to see how well your team stacks up!\n" +
-                "There's much to see and do in Pokémon Red and Pokémon Blue. Start your journey through Kanto and " +
-                "become a Master Trainer!");
+                "Charmander, Pikachu, and Mewtwo were first discovered.");
         // From game description on the official Pokemon website
         game.setPrice(BigDecimal.valueOf(44.99));
         game.setStudio("Game Freak");
@@ -76,22 +61,7 @@ public class GameControllerTest {
         game1.setTitle("Pokemon Blue");
         game1.setEsrbRating("E");
         game1.setDescription("Pokémon Blue introduces legions of gamers to the world of Kanto, where the likes of " +
-                "Charmander, Pikachu, and Mewtwo were first discovered. Through exciting exploration, battles, " +
-                "and trades, Trainers are able to access 150 Pokémon.\n" +
-                "You begin your journey in Pallet Town as a young boy. After a dangerous brush with wild Pokémon, " +
-                "Professor Oak teaches you how to capture Pokémon, and then sends you on your way as a fledgling " +
-                "Trainer. During your journey through Kanto, you must capture Pokémon to record their information in " +
-                "your Pokédex, as well as become a better Trainer by competing in Gyms scattered throughout the region. " +
-                "Once you've proven your mettle as a Pokémon Trainer, it's time to take on the Elite Four, a crack group " +
-                "of Trainers that will put all of your learned skills to the test.\n" +
-                "Your journey will be far from easy. In addition to the many Trainers and wild Pokémon you'll encounter " +
-                "along the way, you'll also have to be watchful of Team Rocket, a despicable group of Pokémon thieves. " +
-                "Prevent Team Rocket from stealing rare Pokémon and stop their criminal ways!\n" +
-                "You won't be able to catch every Pokémon in either Pokémon Red or Pokémon Blue; to collect every " +
-                "Pokémon, you'll have to trade with friends via the Game Link™ Cable. With it, you can also take your " +
-                "team of faithful Pokémon into battle against your pals to see how well your team stacks up!\n" +
-                "There's much to see and do in Pokémon Red and Pokémon Blue. Start your journey through Kanto and " +
-                "become a Master Trainer!");
+                "Charmander, Pikachu, and Mewtwo were first discovered.");
         // From game description on the official Pokemon website
         game1.setPrice(BigDecimal.valueOf(44.99));
         game1.setStudio("Game Freak");
@@ -102,22 +72,7 @@ public class GameControllerTest {
         game1.setTitle("Pokemon Red");
         game1.setEsrbRating("E");
         game1.setDescription("Pokémon Red introduces legions of gamers to the world of Kanto, where the likes of " +
-                "Charmander, Pikachu, and Mewtwo were first discovered. Through exciting exploration, battles, " +
-                "and trades, Trainers are able to access 150 Pokémon.\n" +
-                "You begin your journey in Pallet Town as a young boy. After a dangerous brush with wild Pokémon, " +
-                "Professor Oak teaches you how to capture Pokémon, and then sends you on your way as a fledgling " +
-                "Trainer. During your journey through Kanto, you must capture Pokémon to record their information in " +
-                "your Pokédex, as well as become a better Trainer by competing in Gyms scattered throughout the region. " +
-                "Once you've proven your mettle as a Pokémon Trainer, it's time to take on the Elite Four, a crack group " +
-                "of Trainers that will put all of your learned skills to the test.\n" +
-                "Your journey will be far from easy. In addition to the many Trainers and wild Pokémon you'll encounter " +
-                "along the way, you'll also have to be watchful of Team Rocket, a despicable group of Pokémon thieves. " +
-                "Prevent Team Rocket from stealing rare Pokémon and stop their criminal ways!\n" +
-                "You won't be able to catch every Pokémon in either Pokémon Red or Pokémon Blue; to collect every " +
-                "Pokémon, you'll have to trade with friends via the Game Link™ Cable. With it, you can also take your " +
-                "team of faithful Pokémon into battle against your pals to see how well your team stacks up!\n" +
-                "There's much to see and do in Pokémon Red and Pokémon Blue. Start your journey through Kanto and " +
-                "become a Master Trainer!");
+                "Charmander, Pikachu, and Mewtwo were first discovered.");
         // From game description on the official Pokemon website
         game1.setPrice(BigDecimal.valueOf(44.99));
         game1.setStudio("Game Freak");
@@ -212,14 +167,7 @@ public class GameControllerTest {
         Game inputGame = new Game();
         inputGame.setTitle("Pokemon Yellow");
         inputGame.setEsrbRating("E");
-        inputGame.setDescription("Building on the terrific success of Pokémon Red Version and Pokémon Blue Version, " +
-                "Pokémon Yellow Version returns Trainers to Kanto for more even more fun and adventure. Pokémon Yellow " +
-                "delivers a feature that hasn't been duplicated in any other Pokémon game-Pikachu actually follows you " +
-                "around throughout your journey!\n" +
-                "The graphics for Pokémon Yellow are updated slightly from Pokémon Red and Pokémon Blue, and you can " +
-                "use innovative peripherals such as the Game Boy Printer, which allow you to print out stickers of " +
-                "your favorite Pokémon. Pokémon Yellow also introduces challenges and battle modes that let you " +
-                "compete in exciting ways.");
+        inputGame.setDescription("Pokémon Yellow Version returns Trainers to Kanto for more even more fun and adventure.");
         // From game description on the official Pokemon website
         inputGame.setPrice(BigDecimal.valueOf(44.99));
         inputGame.setQuantity(600);
