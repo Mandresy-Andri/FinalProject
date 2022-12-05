@@ -53,9 +53,13 @@ public class Game implements Serializable{
         this.title = title;
     }
 
-    public String getEsrbRating() { return esrbRating; }
+    public String getEsrbRating() {
+        return esrbRating;
+    }
 
-    public void setEsrbRating(String esrbRating) { this.esrbRating = esrbRating; }
+    public void setEsrbRating(String esrbRating) {
+        this.esrbRating = esrbRating;
+    }
 
     public String getDescription() {
         return description;
