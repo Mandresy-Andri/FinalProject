@@ -11,33 +11,33 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/console")
+//@RequestMapping(value = "/console")
 public class ConsoleController {
 
     @Autowired
     private ConsoleRepository repo;
 
     //Create
-    @PostMapping
+    @PostMapping(value = "/console")
     @ResponseStatus(HttpStatus.CREATED)
     public Console addConsole(@RequestBody Console console){
         return repo.save(console);
     }
 
-    @GetMapping(value = "/id/{id}")
+    @GetMapping(value =" /console/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Console getConsoleById(@PathVariable int id){
         Optional<Console> returnVal = repo.findById(id);
         return returnVal.orElse(null);
     }
 
-    @GetMapping
+    @GetMapping(value = "/console")
     @ResponseStatus(HttpStatus.OK)
     public List<Console> getConsole(){
         return repo.findAll();
     }
 
-    @PutMapping(value = "/id/{id}")
+    @PutMapping(value = "/console/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Console updateConsole(@RequestBody Console console, @PathVariable int id){
         Console newConsole = repo.findById(id).map(c ->{
