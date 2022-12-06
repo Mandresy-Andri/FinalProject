@@ -38,12 +38,12 @@ public class TShirtControllerTest {
 
     private TShirt shirt;
     private String shirtJson;
-    private List<TShirt> allAuthors = new ArrayList<>();
+    private List<TShirt> allTshirts = new ArrayList<>();
     private String allShirtsJson;
 
     @Before
     public void setup() throws Exception {
-        //add new author
+        //add new tshirt
         shirt = new TShirt();
         shirt.setId(1);
         shirt.setSize("Large");
@@ -54,7 +54,7 @@ public class TShirtControllerTest {
 
         shirtJson = mapper.writeValueAsString(shirt);
 
-        //add new author
+        //add new tshirt
         TShirt shirt2 = new TShirt();
         shirt2.setId(2);
         shirt2.setSize("Large");
@@ -63,19 +63,19 @@ public class TShirtControllerTest {
         shirt2.setPrice(new BigDecimal("26"));
         shirt2.setQuantity(2);
 
-        //add authors to list
-        allAuthors.add(shirt);
-        allAuthors.add(shirt2);
+        //add tshirts to list
+        allTshirts.add(shirt);
+        allTshirts.add(shirt2);
 
         //change list to JSON
-        allShirtsJson = mapper.writeValueAsString(allAuthors);
+        allShirtsJson = mapper.writeValueAsString(allTshirts);
     }
 
 
     // Testing GET all
     @Test
     public void shouldReturnAllTShirt() throws Exception {
-        doReturn(allAuthors).when(repo).findAll();
+        doReturn(allTshirts).when(repo).findAll();
 
         mockMvc.perform(
                         get("/tshirt"))
