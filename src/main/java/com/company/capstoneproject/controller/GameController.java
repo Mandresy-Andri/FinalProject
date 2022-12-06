@@ -27,7 +27,7 @@ public class GameController {
     }
 
     // Read
-    @GetMapping(value = "/id/{id}")
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Game getGameById(@PathVariable int id) {
         Optional<Game> returnVal = repo.findById(id);
@@ -41,9 +41,11 @@ public class GameController {
         return repo.findAll();
     }
 
-    @PutMapping(value = "/id/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Game updateGame(@RequestBody Game game, @PathVariable int id) {
+    @PutMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateGame(@RequestBody Game game) {
+        repo.save(game);
+/*
         Game newGame = repo.findById(id)
                 .map(g -> {
                     g.setTitle(game.getTitle());
@@ -57,12 +59,14 @@ public class GameController {
                     game.setGame_id(id);
                     return repo.save(game);
                 });
+                */
 
-        return repo.save(game);
+        //return repo.save(game);
+
     }
 
     // Delete
-    @DeleteMapping("/game/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable int id) {
         repo.deleteById(id);
@@ -70,7 +74,7 @@ public class GameController {
 
     @GetMapping(value = "/studio/{studio}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Game> findByStudio(@PathVariable String studio) {
+    public List<Game> getGamesByStudio(@PathVariable String studio) {
         Optional<List<Game>> returnVal = repo.getGamesByStudio(studio);
         if (returnVal.isPresent()) {
             return returnVal.get();
@@ -79,9 +83,9 @@ public class GameController {
         }
     }
 
-    @GetMapping(value = "/Esrb_rating/{Esrb_rating}")
+    @GetMapping(value = "/esrb_rating/{esrb_rating}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Game> findByEsrb_rating(@PathVariable String esrb_rating) {
+    public List<Game> getGamesByEsrb_rating(@PathVariable String esrb_rating) {
         Optional<List<Game>> returnVal = repo.getGamesByEsrbRating(esrb_rating);
         if (returnVal.isPresent()) {
             return returnVal.get();
@@ -92,7 +96,7 @@ public class GameController {
 
     @GetMapping(value = "/title/{title}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Game> findByTitle(@PathVariable String title) {
+    public List<Game> getGamesByTitle(@PathVariable String title) {
         Optional<List<Game>> returnVal = repo.getGamesByTitle(title);
         if (returnVal.isPresent()) {
             return returnVal.get();

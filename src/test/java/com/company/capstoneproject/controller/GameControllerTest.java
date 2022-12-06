@@ -45,6 +45,7 @@ public class GameControllerTest {
     public void setup() throws Exception {
         //add new author
         game = new Game();
+        game.setGame_id(1);
         game.setTitle("Pokemon");
         game.setEsrbRating("E");
         game.setDescription("Pokémon introduces legions of gamers to the world of Kanto, where the likes of " +
@@ -58,6 +59,7 @@ public class GameControllerTest {
 
         //add new game
         Game game1 = new Game();
+        game1.setGame_id(2);
         game1.setTitle("Pokemon Blue");
         game1.setEsrbRating("E");
         game1.setDescription("Pokémon Blue introduces legions of gamers to the world of Kanto, where the likes of " +
@@ -69,14 +71,15 @@ public class GameControllerTest {
 
         //add new game
         Game game2 = new Game();
-        game1.setTitle("Pokemon Red");
-        game1.setEsrbRating("E");
-        game1.setDescription("Pokémon Red introduces legions of gamers to the world of Kanto, where the likes of " +
+        game2.setGame_id(3);
+        game2.setTitle("Pokemon Red");
+        game2.setEsrbRating("E");
+        game2.setDescription("Pokémon Red introduces legions of gamers to the world of Kanto, where the likes of " +
                 "Charmander, Pikachu, and Mewtwo were first discovered.");
         // From game description on the official Pokemon website
-        game1.setPrice(BigDecimal.valueOf(44.99));
-        game1.setStudio("Game Freak");
-        game1.setQuantity(800);
+        game2.setPrice(BigDecimal.valueOf(44.99));
+        game2.setStudio("Game Freak");
+        game2.setQuantity(800);
 
         //add games to list
         allGames.add(game);
@@ -94,7 +97,7 @@ public class GameControllerTest {
         doReturn(allGames).when(repo).findAll();
 
         mockMvc.perform(
-                        get("/game"))
+                        get("/games"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(allGamesJson)
                 );
@@ -106,7 +109,7 @@ public class GameControllerTest {
         doReturn(Optional.of(game)).when(repo).findById(1);
 
         ResultActions result = mockMvc.perform(
-                        get("/game/{id}", 1))
+                        get("/games/{id}", 1))
                 .andExpect(status().isOk())
                 .andExpect((content().json(gameJson))
                 );
@@ -122,7 +125,7 @@ public class GameControllerTest {
         doReturn(Optional.of(gameList)).when(repo).getGamesByStudio("Game Freak");
 
         ResultActions result = mockMvc.perform(
-                        get("/game/studio/{studio}", "Game Freak"))
+                        get("/games/studio/{studio}", "Game Freak"))
                 .andExpect(status().isOk())
                 .andExpect((content().json(allGameFreakGamesJson))
                 );
@@ -138,7 +141,7 @@ public class GameControllerTest {
         doReturn(Optional.of(gameList)).when(repo).getGamesByEsrbRating("E");
 
         ResultActions result = mockMvc.perform(
-                        get("/game/Esrb_rating/{Esrb_rating}", "E"))
+                        get("/games/esrb_rating/{esrb_rating}", "E"))
                 .andExpect(status().isOk())
                 .andExpect((content().json(allRatedEGamesJson))
                 );
@@ -154,7 +157,7 @@ public class GameControllerTest {
         doReturn(Optional.of(gameList)).when(repo).getGamesByTitle("Pokemon");
 
         ResultActions result = mockMvc.perform(
-                        get("/game/title/{title}", "Pokemon"))
+                        get("/games/title/{title}", "Pokemon"))
                 .andExpect(status().isOk())
                 .andExpect((content().json(allPokemonGamesJson))
                 );
@@ -165,11 +168,13 @@ public class GameControllerTest {
     public void shouldCreateGameOnPostRequest() throws Exception {
         //create new author
         Game inputGame = new Game();
+        inputGame.setGame_id(4);
         inputGame.setTitle("Pokemon Yellow");
         inputGame.setEsrbRating("E");
         inputGame.setDescription("Pokémon Yellow Version returns Trainers to Kanto for more even more fun and adventure.");
         // From game description on the official Pokemon website
         inputGame.setPrice(BigDecimal.valueOf(44.99));
+        inputGame.setStudio("Game Freak");
         inputGame.setQuantity(600);
 
         //change to Json input to test Post
@@ -180,7 +185,7 @@ public class GameControllerTest {
 
         //perform post
         mockMvc.perform(
-                        post("/game")
+                        post("/games")
                                 .content(inputJson)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
@@ -193,7 +198,7 @@ public class GameControllerTest {
     public void shouldUpdate() throws Exception {
         doReturn(game).when(repo).save(game);
         mockMvc.perform(
-                        put("/game")
+                        put("/games/{id}", 1)
                                 .content(gameJson)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
@@ -203,7 +208,7 @@ public class GameControllerTest {
     @Test
     public void shouldDeleteById() throws Exception {
         doNothing().when(repo).deleteById(game.getGame_id());
-        mockMvc.perform(delete("/game/{id}", 1))
+        mockMvc.perform(delete("/games/{id}", 1))
                 .andExpect(status().isNoContent());
     }
 }
