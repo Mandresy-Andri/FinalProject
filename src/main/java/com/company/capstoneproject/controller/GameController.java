@@ -41,7 +41,7 @@ public class GameController {
         return repo.findAll();
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping//value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateGame(@RequestBody Game game) {
         repo.save(game);

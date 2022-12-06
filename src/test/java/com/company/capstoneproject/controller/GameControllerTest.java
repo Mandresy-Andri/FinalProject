@@ -198,7 +198,7 @@ public class GameControllerTest {
     public void shouldUpdate() throws Exception {
         doReturn(game).when(repo).save(game);
         mockMvc.perform(
-                        put("/games/{id}", 1)
+                        put("/games")
                                 .content(gameJson)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
