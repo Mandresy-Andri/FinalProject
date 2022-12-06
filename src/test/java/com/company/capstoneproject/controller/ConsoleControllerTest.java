@@ -20,108 +20,86 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Collections;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @RunWith(SpringRunner.class)
 @WebMvcTest(ConsoleController.class)
 public class ConsoleControllerTest {
-
     @MockBean
     private ConsoleRepository repository;
-
     @Autowired
     private MockMvc mockMvc;
     Console console1;
     Console console2;
-    Console console3;
     List<Console> consoles = new ArrayList<>();
     private ObjectMapper objectMapper = new ObjectMapper();
-
-
-
     @Before
     public void setUp() {
-
-
         console1 = new Console();
         console1.setConsole_id(1);
         console1.setDescription("PS5");
         console1.setQuantity(43);
         console1.setManufacturer("Sony");
         console1.setPrice(new BigDecimal(434));
-
         console2 = new Console();
         console2.setConsole_id(2);
         console2.setDescription("PS5");
         console2.setQuantity(43);
         console2.setManufacturer("Microsoft");
         console2.setPrice(new BigDecimal(384));
-
         consoles.add(console1);
         consoles.add(console2);
     }
+    //wrong url used
+    @Test
+    public void findByIdShouldReturnOkResponseAndConsole() throws Exception {
+//        ARRANGE
+        int id = 1;
+        doReturn(Optional.of(console1)).when(repository).findById(1);
+//        ACT & ASSERT
+        mockMvc.perform(
+                        get("/console/{id}",1))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
 
-
-//    @Test
-//    public void findByIdShouldReturnOkResponseAndConsole() throws Exception {
-////        ARRANGE
-//        int id = 1;
-//        doReturn(Optional.of(console1)).when(repository).findById(1);
-////        ACT & ASSERT
-//        mockMvc.perform(
-//                        get("/id/1"))
-//                .andExpect(status().isOk())
-//                .andDo(print());
-//    }
-
-
-//    @Test
-//    public void findByManufacturerShouldReturnOkResponseAndConsoleWithManufacturer() throws Exception {
-////        ARRANGE
-//        String manufacturer = console2.getManufacturer();
-//        List<Console> expectedConsoleResult = Collections.singletonList(console2);
-//        when(repository.getConsoleByManufacturer(manufacturer)).thenReturn(expectedConsoleResult);
-//
-//        String expectedResultJson = objectMapper.writeValueAsString(expectedConsoleResult);
-//
-////        ACT & ASSERT
-//        MvcResult result = mockMvc.perform(
-//                        get( "/manufacturer/manufacturer"))
-//                .andExpect(status().isOk())
-//                .andExpect(content().json(expectedResultJson))
-//                .andDo(print())
-//                .andReturn();
-//    }
-
+    //Wrong url. Didn't specify which manufacturer it should look for
+    @Test
+    public void findByManufacturerShouldReturnOkResponseAndConsoleWithManufacturer() throws Exception {
+//        ARRANGE
+        String manufacturer = console2.getManufacturer();
+        List<Console> expectedConsoleResult = Collections.singletonList(console2);
+        when(repository.getConsoleByManufacturer(manufacturer)).thenReturn(expectedConsoleResult);
+        String expectedResultJson = objectMapper.writeValueAsString(expectedConsoleResult);
+//        ACT & ASSERT
+        MvcResult result = mockMvc.perform(
+                        get( "/manufacturer/{manufacturer}","Microsoft"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(expectedResultJson))
+                .andDo(print())
+                .andReturn();
+    }
 
     @Test
     public void findAllConsolesShouldReturnOKResponseAndListOfConsoles() throws Exception {
-
         doReturn(consoles).when(repository).findAll();
-
         mockMvc.perform(get( "/console"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-
     @Test
     public void shouldCreatedNewConsoleOnPostRequest() throws Exception {
-      Console  input = new Console();
+        Console  input = new Console();
         input.setConsole_id(1);
         input.setDescription("PS5");
         input.setQuantity(43);
         input.setManufacturer("Sony");
         input.setPrice(new BigDecimal(434));
         String inputJson = objectMapper.writeValueAsString(input);
-
-
         doReturn(console1).when(repository).save(input);
-
         mockMvc.perform(
                         post( "/console")
                                 .content(inputJson)
@@ -129,27 +107,28 @@ public class ConsoleControllerTest {
                 )
                 .andDo(print())
                 .andExpect(status().isCreated());
-
     }
 
-//
-//    @Test
-//    public void updateConsoleShouldReturnAcceptedResponse() throws Exception {
-//        console1.setManufacturer("Nintendo");
-//        String updatedConsoleJson = objectMapper.writeValueAsString(console1);
-//
-//        mockMvc.perform(
-//                        put("/id/1").content(updatedConsoleJson)
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isNoContent());
-//    }
+    //wrong url
+    //Error in ConsoleController. The put mapping is returning ACCEPTED instead of NO CONTENT
+    @Test
+    public void updateConsoleShouldReturnAcceptedResponse() throws Exception {
+        console1.setManufacturer("Nintendo");
+        String updatedConsoleJson = objectMapper.writeValueAsString(console1);
+        mockMvc.perform(
+                        put("/console/1").content(updatedConsoleJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNoContent());
+    }
 
+    //No mock object in method (doReturn...)
+    //Wrong url (/console/console/{id}
     @Test
     public void deleteConsoleShouldReturnNoContentResponse() throws Exception {
+        doNothing().when(repository).deleteById(console1.getConsole_id());
         mockMvc.perform(
-                        delete("/console/1"))
+                        delete("/console/{id}",1))
                 .andExpect(status().isNoContent());
     }
 }
-

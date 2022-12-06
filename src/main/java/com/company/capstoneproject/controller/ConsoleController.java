@@ -24,7 +24,7 @@ public class ConsoleController {
         return repo.save(console);
     }
 
-    @GetMapping(value =" /console/{id}")
+    @GetMapping(value ="/console/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Console getConsoleById(@PathVariable int id){
         Optional<Console> returnVal = repo.findById(id);
@@ -38,7 +38,7 @@ public class ConsoleController {
     }
 
     @PutMapping(value = "/console/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Console updateConsole(@RequestBody Console console, @PathVariable int id){
         Console newConsole = repo.findById(id).map(c ->{
             //c.setConsole_name(console.getConsole_name());
