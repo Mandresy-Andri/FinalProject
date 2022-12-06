@@ -30,11 +30,11 @@ public class InvoiceViewModel {
     private String zipcode;
 
     //calculated by system
-    private String processing_fee;
-    private BigDecimal subtotal;
-    private BigDecimal tax;
-    private BigDecimal total;
-    private BigDecimal unit_price;
+    private BigDecimal processing_fee; //basic fee + 15.49 if quantity>10
+    private BigDecimal subtotal; //price * quantity
+    private BigDecimal tax; // percentage of subtotal based on state
+    private BigDecimal unit_price; //price of the item
+    private BigDecimal total; // sum of everything
 
     public int getId() {
         return id;
@@ -108,11 +108,11 @@ public class InvoiceViewModel {
         this.zipcode = zipcode;
     }
 
-    public String getProcessing_fee() {
+    public BigDecimal getProcessing_fee() {
         return processing_fee;
     }
 
-    public void setProcessing_fee(String processing_fee) {
+    public void setProcessing_fee(BigDecimal processing_fee) {
         this.processing_fee = processing_fee;
     }
 
