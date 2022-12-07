@@ -18,9 +18,6 @@ public class Console implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int console_id;
 
-    //@NotEmpty(message = "You must a supply a value for Console")
-    //private String console_name;
-
     @NotEmpty(message = "You must supply a value for model")
     private String model;
 
@@ -29,8 +26,6 @@ public class Console implements Serializable {
 
     @NotEmpty(message = "You must supply a value for processor")
     private String processor;
-
-
 
     @NotEmpty(message = "You must supply a value for quantity")
     private int quantity;

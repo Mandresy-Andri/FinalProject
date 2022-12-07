@@ -1,5 +1,6 @@
 package com.company.capstoneproject.service;
 
+import com.company.capstoneproject.model.ProcessingFee;
 import com.company.capstoneproject.model.*;
 import com.company.capstoneproject.repository.*;
 import com.company.capstoneproject.viewmodel.InvoiceViewModel;
@@ -47,6 +48,11 @@ public class ServiceLayer {
         a.setCity(viewModel.getCity());
         a.setState(viewModel.getState());
         a.setZipcode(viewModel.getZipcode());
+        a.setProcessing_fee(new BigDecimal(0));
+        a.setSubtotal(new BigDecimal(0));
+        a.setTax(new BigDecimal(0));
+        a.setTotal(new BigDecimal(0));
+        a.setUnit_price(new BigDecimal(0));
         a = invoiceRepository.save(a);
         viewModel.setId(a.getId());
 
@@ -54,7 +60,6 @@ public class ServiceLayer {
         int id = a.getItem_id();
         String type = a.getItem_type();
         int quantity = a.getQuantity();
-        System.out.println(id+", "+type+", "+quantity);
 
         //price of the item (method also check if object exists, quantity is valid, and updates new quantity)
         BigDecimal unit_price = GetUnitPrice(type,id,quantity);
@@ -81,7 +86,6 @@ public class ServiceLayer {
     //updates Object quantity
     //returns the unit price of the verified object
     public BigDecimal GetUnitPrice(String type,int id,int quantity) {
-        System.out.println(id+" "+type+", "+quantity);
         BigDecimal answer = null;
         switch (type){
             case "Console":
@@ -135,86 +139,29 @@ public class ServiceLayer {
     //checks if item type is valid then returns processing fee
     public BigDecimal GetProcessingFee(String type, int quantity) {
         BigDecimal answer = null;
-        //Optional<ProcessingFee> processingFee = processingFeeRepository.findById(type);
-        Map<String, BigDecimal> fees = new HashMap<>();
-        fees.put("Console",new BigDecimal(14.99));
-        fees.put("Game",new BigDecimal(1.49));
-        fees.put("T-Shirt",new BigDecimal(1.98));
-
-        answer = fees.get(type);
-//        if(processingFee.isPresent())
-//            answer = processingFee.get().getFee();
-//        else
-//            throw new IllegalArgumentException("Wrong processing fee");
-
+        Optional<ProcessingFee> fee = processingFeeRepository.findById(type);
+        //get fee from Item if item exists
+        if(fee.isPresent())
+            answer = fee.get().getFee();
+        else
+            throw new IllegalArgumentException("Unable to get processing fee");
+        //if quantity is over 10 then add extra fee
         if(quantity>10)
             answer = answer.add(new BigDecimal("15.49")).setScale(2, RoundingMode.HALF_UP);
 
-        System.out.println(answer);
         return answer;
     }
 
     //Checks if state is valid then returns tax
     public BigDecimal GetAndCheckTax(String state,BigDecimal subtotal) {
         BigDecimal answer = null;
-        //Optional<Tax> tax = taxRepository.findById(state);
-
-        Map<String, BigDecimal> taxes = new HashMap<>();
-        taxes.put("AL",new BigDecimal(0.05));
-        taxes.put("AK",new BigDecimal(0.06));
-        taxes.put("AZ",new BigDecimal(0.04));
-        taxes.put("AR",new BigDecimal(0.06));
-        taxes.put("CA",new BigDecimal(0.06));
-        taxes.put("CO",new BigDecimal(0.04));
-        taxes.put("CT",new BigDecimal(0.03));
-        taxes.put("DE",new BigDecimal(0.05));
-        taxes.put("FL",new BigDecimal(0.06));
-        taxes.put("GA",new BigDecimal(0.07));
-        taxes.put("HI",new BigDecimal(0.05));
-        taxes.put("ID",new BigDecimal(0.03));
-        taxes.put("IL",new BigDecimal(0.05));
-        taxes.put("IN",new BigDecimal(0.05));
-        taxes.put("IA",new BigDecimal(0.04));
-        taxes.put("KS",new BigDecimal(0.06));
-        taxes.put("KY",new BigDecimal(0.04));
-        taxes.put("LA",new BigDecimal(0.05));
-        taxes.put("ME",new BigDecimal(0.03));
-        taxes.put("MD",new BigDecimal(0.07));
-        taxes.put("MA",new BigDecimal(0.05));
-        taxes.put("MI",new BigDecimal(0.06));
-        taxes.put("MN",new BigDecimal(0.06));
-        taxes.put("MO",new BigDecimal( .05));
-        taxes.put("MT",new BigDecimal( .03));
-        taxes.put ("NE",new BigDecimal( .04));
-        taxes.put("NV",new BigDecimal( .04));
-        taxes.put("NH",new BigDecimal( .06));
-        taxes.put("NJ",new BigDecimal( .05));
-        taxes.put("NM",new BigDecimal( .05));
-        taxes.put("NY",new BigDecimal( .06));
-        taxes.put("NC",new BigDecimal( .05));
-        taxes.put("ND",new BigDecimal( .05));
-        taxes.put("OH",new BigDecimal( .04));
-        taxes.put("OK",new BigDecimal( .04));
-        taxes.put("OR",new BigDecimal( .07));
-        taxes.put("PA",new BigDecimal( .06));
-        taxes.put("RI",new BigDecimal( .06));
-        taxes.put ("SC",new BigDecimal( .06));
-        taxes.put ("SD",new BigDecimal( .06));
-        taxes.put ("TN",new BigDecimal( .05));
-        taxes.put ("TX",new BigDecimal( .03));
-        taxes.put("UT",new BigDecimal( .04));
-        taxes.put("VT", new BigDecimal(.07));
-        taxes.put("VA",new BigDecimal( .06));
-        taxes.put("WA",new BigDecimal( .05));
-        taxes.put ("WV",new BigDecimal( .05));
-        taxes.put ("WI", new BigDecimal(.03));
-        taxes.put ("WY",new BigDecimal (.04));
-
-//        if(tax.isPresent())
-//            answer = tax.get().getRate();
-//        else
-//            throw new IllegalArgumentException("Invalid State");
-        answer = taxes.get(state);
+        Optional<Tax> tax = taxRepository.findById(state);
+        //get tax rate from item if the state exists
+        if(tax.isPresent())
+            answer = tax.get().getRate();
+        else
+            throw new IllegalArgumentException("Invalid State");
+        //multiply tax rate with current subtotal to now tax to pay
         answer = answer.multiply(subtotal).setScale(2, RoundingMode.HALF_UP);
 
         return answer;
@@ -230,7 +177,7 @@ public class ServiceLayer {
 
     @Transactional
     public InvoiceViewModel findInvoice(int id) {
-        // Get the album object first
+        // Get the invoice object first
         Optional<Invoice> invoice = invoiceRepository.findById(id);
 
         return invoice.isPresent() ? buildInvoiceViewModel(invoice.get()) : null;

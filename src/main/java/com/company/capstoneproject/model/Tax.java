@@ -4,18 +4,16 @@ package com.company.capstoneproject.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "sales_tax_rate")
-public class Tax {
+public class Tax implements Serializable {
 
-    @Id
-    @Column(name = "state",unique=true)
+    @Id @Column(length = 2)
     private String state;
 
     private BigDecimal rate;

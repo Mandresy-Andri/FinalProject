@@ -752,16 +752,22 @@ components:
           format: int32
     Console:
       required:
-        - description
         - manufacturer
+        - memory_amount
+        - model
         - price
+        - processor
         - quantity
       type: object
       properties:
         console_id:
           type: integer
           format: int32
-        description:
+        model:
+          type: string
+        memory_amount:
+          type: string
+        processor:
           type: string
         quantity:
           type: integer

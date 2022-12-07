@@ -5,6 +5,9 @@ import com.company.capstoneproject.repository.*;
 import com.company.capstoneproject.viewmodel.InvoiceViewModel;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
+@SpringBootTest
 public class ServiceLayerTest {
 
     ServiceLayer service;
@@ -161,6 +165,11 @@ public class ServiceLayerTest {
         invoice2.setCity("Clovis");
         invoice2.setState("CA");
         invoice2.setZipcode("93612");
+        invoice2.setProcessing_fee(new BigDecimal(0));
+        invoice2.setSubtotal(new BigDecimal(0));
+        invoice2.setTax(new BigDecimal(0));
+        invoice2.setTotal(new BigDecimal(0));
+        invoice2.setUnit_price(new BigDecimal(0));
 
         List<Invoice> iList = new ArrayList<>();
         iList.add(invoice);
@@ -174,7 +183,6 @@ public class ServiceLayerTest {
     @Test
     public void shouldCalculateAndSaveInvoice() {
         InvoiceViewModel invoice = new InvoiceViewModel();
-        invoice.setId(1);
         invoice.setItem_id(269);
         invoice.setQuantity(12);
         invoice.setItem_type("Game");

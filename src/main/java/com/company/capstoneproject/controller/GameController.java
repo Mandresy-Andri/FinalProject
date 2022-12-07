@@ -41,28 +41,10 @@ public class GameController {
         return repo.findAll();
     }
 
-    @PutMapping//value = "/{id}")
+    @PutMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@RequestBody Game game) {
+    public void updateGame(@RequestBody @Valid Game game) {
         repo.save(game);
-/*
-        Game newGame = repo.findById(id)
-                .map(g -> {
-                    g.setTitle(game.getTitle());
-                    g.setEsrbRating(game.getEsrbRating());
-                    g.setDescription(game.getDescription());
-                    g.setPrice(game.getPrice());
-                    g.setStudio(game.getStudio());
-                    g.setQuantity(game.getQuantity());
-                    return repo.save(game);
-                }) .orElseGet(() -> {
-                    game.setGame_id(id);
-                    return repo.save(game);
-                });
-                */
-
-        //return repo.save(game);
-
     }
 
     // Delete

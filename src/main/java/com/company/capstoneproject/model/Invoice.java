@@ -3,20 +3,20 @@ package com.company.capstoneproject.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "invoice")
-public class Invoice {
+public class Invoice implements Serializable {
 
     @Id
     @Column(name = "invoice_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    //information needed by endpoint
     private int item_id;
     private String item_type;
     private int quantity;
@@ -145,6 +145,19 @@ public class Invoice {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Invoice invoice = (Invoice) o;
+        return id == invoice.id && item_id == invoice.item_id && quantity == invoice.quantity && Objects.equals(item_type, invoice.item_type) && Objects.equals(name, invoice.name) && Objects.equals(street, invoice.street) && Objects.equals(city, invoice.city) && Objects.equals(state, invoice.state) && Objects.equals(zipcode, invoice.zipcode) && Objects.equals(processing_fee, invoice.processing_fee) && Objects.equals(subtotal, invoice.subtotal) && Objects.equals(tax, invoice.tax) && Objects.equals(total, invoice.total) && Objects.equals(unit_price, invoice.unit_price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, item_id, item_type, quantity, name, street, city, state, zipcode, processing_fee, subtotal, tax, total, unit_price);
+    }
+
+    @Override
     public String toString() {
         return "Invoice{" +
                 "id=" + id +
@@ -162,18 +175,5 @@ public class Invoice {
                 ", total=" + total +
                 ", unit_price=" + unit_price +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Invoice invoice = (Invoice) o;
-        return id == invoice.id && item_id == invoice.item_id && quantity == invoice.quantity && Objects.equals(item_type, invoice.item_type) && Objects.equals(name, invoice.name) && Objects.equals(street, invoice.street) && Objects.equals(city, invoice.city) && Objects.equals(state, invoice.state) && Objects.equals(zipcode, invoice.zipcode) && Objects.equals(processing_fee, invoice.processing_fee) && Objects.equals(subtotal, invoice.subtotal) && Objects.equals(tax, invoice.tax) && Objects.equals(total, invoice.total) && Objects.equals(unit_price, invoice.unit_price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, item_id, item_type, quantity, name, street, city, state, zipcode, processing_fee, subtotal, tax, total, unit_price);
     }
 }

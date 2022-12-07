@@ -5,17 +5,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "processing_fee")
-public class ProcessingFee {
+public class ProcessingFee implements Serializable {
 
     @Id
-    @NotNull
-    @Column(name = "product_type",unique=true)
+    @Column(name = "product_type",length = 20)
     private String productType;
 
     private BigDecimal fee;
@@ -37,14 +37,6 @@ public class ProcessingFee {
     }
 
     @Override
-    public String toString() {
-        return "ProcessingFee{" +
-                "productType='" + productType + '\'' +
-                ", fee=" + fee +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -55,5 +47,13 @@ public class ProcessingFee {
     @Override
     public int hashCode() {
         return Objects.hash(productType, fee);
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessingFee{" +
+                "productType='" + productType + '\'' +
+                ", fee=" + fee +
+                '}';
     }
 }

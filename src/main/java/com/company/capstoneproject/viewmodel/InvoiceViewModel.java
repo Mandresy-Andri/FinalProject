@@ -10,23 +10,23 @@ public class InvoiceViewModel {
 
     private int id;
 
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for item_id.")
     private int item_id;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for item_type.")
     private String item_type;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for quantity.")
     @Min(value = 1, message = "Quantity must be greater than zero")
     private int quantity;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for name.")
     private String name;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for street.")
     private String street;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for city.")
     private String city;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for state.")
     @Size(min = 2,max = 2)
     private String state;
-    @NotEmpty(message = "You must supply a value for size.")
+    @NotEmpty(message = "You must supply a value for zipcode.")
     private String zipcode;
 
     //calculated by system
@@ -149,6 +149,19 @@ public class InvoiceViewModel {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InvoiceViewModel that = (InvoiceViewModel) o;
+        return id == that.id && item_id == that.item_id && quantity == that.quantity && Objects.equals(item_type, that.item_type) && Objects.equals(name, that.name) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zipcode, that.zipcode) && Objects.equals(processing_fee, that.processing_fee) && Objects.equals(subtotal, that.subtotal) && Objects.equals(tax, that.tax) && Objects.equals(unit_price, that.unit_price) && Objects.equals(total, that.total);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, item_id, item_type, quantity, name, street, city, state, zipcode, processing_fee, subtotal, tax, unit_price, total);
+    }
+
+    @Override
     public String toString() {
         return "InvoiceViewModel{" +
                 "id=" + id +
@@ -160,24 +173,11 @@ public class InvoiceViewModel {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zipcode='" + zipcode + '\'' +
-                ", processing_fee='" + processing_fee + '\'' +
+                ", processing_fee=" + processing_fee +
                 ", subtotal=" + subtotal +
                 ", tax=" + tax +
-                ", total=" + total +
                 ", unit_price=" + unit_price +
+                ", total=" + total +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        InvoiceViewModel that = (InvoiceViewModel) o;
-        return id == that.id && item_id == that.item_id && quantity == that.quantity && Objects.equals(item_type, that.item_type) && Objects.equals(name, that.name) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zipcode, that.zipcode) && Objects.equals(processing_fee, that.processing_fee) && Objects.equals(subtotal, that.subtotal) && Objects.equals(tax, that.tax) && Objects.equals(total, that.total) && Objects.equals(unit_price, that.unit_price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, item_id, item_type, quantity, name, street, city, state, zipcode, processing_fee, subtotal, tax, total, unit_price);
     }
 }
