@@ -15,6 +15,8 @@
 	<description>Capstone Project: Game Store API</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<maven.test.skip>true</maven.test.skip>
+		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,6 +59,12 @@
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.8</version>
 		</dependency>
 	</dependencies>
 
