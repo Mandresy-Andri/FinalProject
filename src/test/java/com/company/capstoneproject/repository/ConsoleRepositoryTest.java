@@ -28,9 +28,11 @@ public class ConsoleRepositoryTest {
     public void addGetDeleteConsole(){
         Console console = new Console();
         console.setManufacturer("Nintendo");
-        console.setDescription("Switch");
         console.setPrice(new BigDecimal("299.00"));
         console.setQuantity(2);
+        console.setModel("Switch");
+        console.setMemory_amount("Memory");
+        console.setProcessor("Processor");
         repo.save(console);
 
         Optional<Console> consoleAnswer = repo.findById(console.getConsole_id());
@@ -48,16 +50,20 @@ public class ConsoleRepositoryTest {
 
         Console console = new Console();
         console.setManufacturer("Sony");
-        console.setDescription("PS5");
         console.setPrice(new BigDecimal("499.00"));
         console.setQuantity(2);
+        console.setModel("PSP");
+        console.setMemory_amount("Memory");
+        console.setProcessor("Processor");
         repo.save(console);
 
         Console console2 = new Console();
         console2.setManufacturer("Microsoft");
-        console2.setDescription("XBOX 360");
         console2.setPrice(new BigDecimal("199.00"));
         console2.setQuantity(1);
+        console2.setModel("XBox360");
+        console2.setMemory_amount("Memory");
+        console2.setProcessor("Processor");
         repo.save(console2);
 
         List<Console> consoleList = repo.findAll();
@@ -66,28 +72,15 @@ public class ConsoleRepositoryTest {
     }
 
     @Test
-    public void getPS2() {
-        Console console = new Console();
-        console.setManufacturer("Sony");
-        console.setDescription("PS2");
-        console.setPrice(new BigDecimal(129.00));
-        console.setQuantity(1);
-
-        Optional<List<Console>> consoleList = repo.findByDescription("PS2");
-
-        assertEquals(consoleList.get().get(0), console);
-
-    }
-
-    @Test
     public void updateConsole() {
         Console console = new Console();
         console.setManufacturer("Sony");
-        console.setDescription("PSP");
         console.setPrice(new BigDecimal("112.00"));
+        console.setModel("PS2");
+        console.setMemory_amount("Memory");
+        console.setProcessor("Processor");
         console.setQuantity(3);
 
-        console.setDescription("PSVita");
         repo.save(console);
 
         Optional<Console> consoleAnswer = repo.findById(console.getConsole_id());

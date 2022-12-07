@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@JsonIgnoreProperties
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "console")
 
 public class Console implements Serializable {
@@ -21,8 +21,16 @@ public class Console implements Serializable {
     //@NotEmpty(message = "You must a supply a value for Console")
     //private String console_name;
 
-    @NotEmpty(message = "You must supply a value for description")
-    private String description;
+    @NotEmpty(message = "You must supply a value for model")
+    private String model;
+
+    @NotEmpty(message = "You must supply a value for memory amount")
+    private String memory_amount;
+
+    @NotEmpty(message = "You must supply a value for processor")
+    private String processor;
+
+
 
     @NotEmpty(message = "You must supply a value for quantity")
     private int quantity;
@@ -39,14 +47,6 @@ public class Console implements Serializable {
 
     public void setConsole_id(int console_id) {
         this.console_id = console_id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getQuantity() {
@@ -73,24 +73,50 @@ public class Console implements Serializable {
         this.price = price;
     }
 
-    @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o == null || getClass() != o.getClass()) return false;
-        Console console = (Console) o;
-        return getConsole_id() == console.getConsole_id() && getQuantity() == console.getQuantity()  && getDescription().equals(console.getDescription()) && getPrice().equals(console.getPrice()) && getManufacturer().equals(console.getManufacturer());
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getMemory_amount() {
+        return memory_amount;
+    }
+
+    public void setMemory_amount(String memory_amount) {
+        this.memory_amount = memory_amount;
+    }
+
+    public String getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(String processor) {
+        this.processor = processor;
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(getConsole_id(),getDescription(),getPrice(),getManufacturer(),getQuantity());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Console console = (Console) o;
+        return getConsole_id() == console.getConsole_id() && getQuantity() == console.getQuantity() && Objects.equals(getModel(), console.getModel()) && Objects.equals(getMemory_amount(), console.getMemory_amount()) && Objects.equals(getProcessor(), console.getProcessor()) && Objects.equals(getManufacturer(), console.getManufacturer()) && Objects.equals(getPrice(), console.getPrice());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getConsole_id(), getModel(), getMemory_amount(), getProcessor(), getQuantity(), getManufacturer(), getPrice());
     }
 
     @Override
     public String toString() {
         return "Console{" +
                 "console_id=" + console_id +
-                ", description='" + description + '\'' +
+                ", model='" + model + '\'' +
+                ", memory_amount='" + memory_amount + '\'' +
+                ", processor='" + processor + '\'' +
                 ", quantity=" + quantity +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", price=" + price +

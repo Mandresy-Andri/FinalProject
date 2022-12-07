@@ -40,13 +40,11 @@ public class ConsoleControllerTest {
     public void setUp() {
         console1 = new Console();
         console1.setConsole_id(1);
-        console1.setDescription("PS5");
         console1.setQuantity(43);
         console1.setManufacturer("Sony");
         console1.setPrice(new BigDecimal(434));
         console2 = new Console();
         console2.setConsole_id(2);
-        console2.setDescription("PS5");
         console2.setQuantity(43);
         console2.setManufacturer("Microsoft");
         console2.setPrice(new BigDecimal(384));
@@ -94,7 +92,6 @@ public class ConsoleControllerTest {
     public void shouldCreatedNewConsoleOnPostRequest() throws Exception {
         Console  input = new Console();
         input.setConsole_id(1);
-        input.setDescription("PS5");
         input.setQuantity(43);
         input.setManufacturer("Sony");
         input.setPrice(new BigDecimal(434));

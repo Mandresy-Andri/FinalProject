@@ -95,13 +95,11 @@ public class ServiceLayerTest {
         consoleRepository = mock(ConsoleRepository.class);
         Console console = new Console();
         console.setConsole_id(1);
-        console.setDescription("GameStation");
         console.setQuantity(5);
         console.setManufacturer("Pony");
         console.setPrice(new BigDecimal("325.00"));
 
         Console console2 = new Console();
-        console2.setDescription("GameStation");
         console2.setQuantity(5);
         console2.setManufacturer("Pony");
         console2.setPrice(new BigDecimal("325.00"));

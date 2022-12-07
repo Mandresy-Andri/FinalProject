@@ -11,10 +11,6 @@ import java.util.Optional;
 public interface ConsoleRepository extends JpaRepository<Console, Integer>{
     List<Console> getConsoleByManufacturer(String manufacturer);
 
-    Optional<List<Console>> findByDescription(String console);
-
-
-
 }
 
 

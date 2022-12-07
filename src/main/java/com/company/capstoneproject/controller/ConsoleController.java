@@ -42,10 +42,12 @@ public class ConsoleController {
     public Console updateConsole(@RequestBody Console console, @PathVariable int id){
         Console newConsole = repo.findById(id).map(c ->{
             //c.setConsole_name(console.getConsole_name());
-            c.setDescription(console.getDescription());
             c.setManufacturer(console.getManufacturer());
             c.setPrice(console.getPrice());
             c.setQuantity(console.getQuantity());
+            c.setModel(console.getModel());
+            c.setProcessor(console.getProcessor());
+            c.setMemory_amount(console.getMemory_amount());
             return repo.save(console);
         }) .orElseGet(() -> {
             console.setConsole_id(id);
