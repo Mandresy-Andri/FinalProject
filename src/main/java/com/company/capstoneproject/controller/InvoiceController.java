@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -38,5 +39,12 @@ public class InvoiceController {
     public InvoiceViewModel addInvoice(@RequestBody @Valid InvoiceViewModel albumViewModel) {
         //need to create this method in service layer
         return serviceLayer.saveInvoice(albumViewModel);
+    }
+
+    @PostMapping("/invoice/price")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BigDecimal getUnitPrice(@RequestBody @Valid InvoiceViewModel viewModel) {
+        //need to create this method in service layer
+        return serviceLayer.GetUnitPrice(viewModel.getItem_type(), viewModel.getItem_id(), viewModel.getQuantity());
     }
 }
